@@ -53,8 +53,9 @@ printTextC p a s = "gsave\n" ++ showPair p ++ "translate\n 0 0 moveto\n" ++ show
 
 dimension p1 p2 s = lineWithSize p1 p2 s ++ arrowHead p1 p2 ++ arrowHead p2 p1
 
-dimension' p1 p2 = dimension p1 p2 (show $ length $ p1-p2 )
+dimension' p1 p2 = dimension p1 p2 (show $ radius $ p1-p2 )
 
+lineWithSize :: (Double, Double) -> (Double, Double) -> String -> String
 lineWithSize p1 p2 s = line p1 p2 ++ 
                        printTextC ((x1+x2)/2, (y1+y2)/2) (180/pi* atan ((y2-y1)/(x2-x1))) s
              where (x1, y1) = p1
