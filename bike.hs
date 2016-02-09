@@ -81,23 +81,6 @@ forkCC :: Fork -> (Double, Double)
 forkCC f = (0, -(rake f)) + (x + crownHeight f, 0)
       where x = sqrt $ (legLength f)^2 - (rake f)^2  
 
-
-
-
-mulMatVec ((x1, y1), (x2, y2)) (x, y) = (x1*x + y1*y,   x2*x + y2*y)
-
-
-
-vectorByAngle :: Double -> Double -> (Double, Double)
-vectorByAngle r a = (r*cos (toRadian a), r*sin (toRadian a))
-
-rotateBy :: Double -> (Double, Double) -> (Double, Double)
-rotateBy a v = mulMatVec mat v
-         where mat = ((cos th, -sin th),
-                      (sin th, cos th))
-               th = toRadian a
-
-
 -- this gives 5 base points of a frameset (A, B, C, D, E, F):
 -- A - bottom bracket
 -- B - seat lug
@@ -139,5 +122,3 @@ showBike bk = do
     writeFile "temp.ps"  ps
     system "zathura temp.ps"
     return ()
-
---possibleBike = Frame {seatTube = 570, topTube = 565, topTubeSlope=0, seatAngle = 73.5, headAngle = 75}

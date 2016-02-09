@@ -33,3 +33,14 @@ angleDeg (x, y) = if a<0 then fromRadian (a+2*pi)
              where a = angle (x, y)
 
 roundDec x = (fromIntegral $ round (10*x))/10
+
+mulMatVec ((x1, y1), (x2, y2)) (x, y) = (x1*x + y1*y,   x2*x + y2*y)
+
+vectorByAngle :: Double -> Double -> (Double, Double)
+vectorByAngle r a = (r*cos (toRadian a), r*sin (toRadian a))
+
+rotateBy :: Double -> (Double, Double) -> (Double, Double)
+rotateBy a v = mulMatVec mat v
+         where mat = ((cos th, -sin th),
+                      (sin th, cos th))
+               th = toRadian a
